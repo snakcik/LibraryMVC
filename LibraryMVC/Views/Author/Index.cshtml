@@ -1,0 +1,18 @@
+﻿@using LibraryMVC.Models.View
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+@model List<AuthorViewModel>
+
+<h1>List</h1>
+
+@foreach (var item in Model)
+{
+    <div>
+        <span>@item.AuthorName</span> &nbsp;
+        <span>@item.AuthorLastName</span>&nbsp;
+        <span>@item.AuthorInfo</span>
+    </div>
+}

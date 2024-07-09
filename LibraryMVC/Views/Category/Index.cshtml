@@ -1,0 +1,18 @@
+﻿@using LibraryMVC.Models.View
+@{
+    ViewData["Title"] = "Index";
+}
+@model List<CategoryViewModel>
+<h1>Index</h1>
+
+
+
+@foreach (var item in Model)
+{
+    <div>
+        <span>@item.CategoryName</span> &nbsp;
+
+    </div>
+}
+
+

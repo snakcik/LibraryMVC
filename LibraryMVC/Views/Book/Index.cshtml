@@ -1,0 +1,34 @@
+﻿@using LibraryMVC.Models.View
+
+@{
+    ViewData["Title"] = "Index";
+}
+@model List<BookViewModel>
+
+<h1>Index</h1>
+
+<a asp-controller="Book" asp-action="BookCrate" class="btn btn-primary">Yeni oluştur</a>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Price</th>
+            <th scope="col">Category</th>
+        </tr>
+    </thead>
+        <tbody>
+            @foreach(var item in Model)
+            {
+            <tr>
+                <td>@item.BookName</td>
+                <td>@item.BookPrice</td>
+                <td>@item.CategoryName</td>
+                
+            </tr>
+
+            }
+
+        </tbody>
+</table>
+

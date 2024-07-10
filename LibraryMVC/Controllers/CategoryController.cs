@@ -20,6 +20,7 @@ namespace LibraryMVC.Controllers
                 x => new CategoryViewModel
                     {
                 CategoryName = x.CategoryName,
+                Id = x.CategoryID,
                     }
                 ).ToList();
             return View(listcategories);
@@ -36,7 +37,16 @@ namespace LibraryMVC.Controllers
             
             _context.Categories.Add(category);
             _context.SaveChanges();
-            return View();
+            return RedirectToAction("Index");
+        }
+
+        public IActionResult Delete (int Id)
+        {
+            Category category = _context.Categories.Find(Id);
+            _context.Categories.Remove(category);
+            _context.SaveChanges();
+
+            return RedirectToAction("Index");
         }
     }
 }

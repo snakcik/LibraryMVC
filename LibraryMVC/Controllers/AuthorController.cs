@@ -22,6 +22,8 @@ namespace LibraryMVC.Controllers
                 AuthorName = x.AuthorName,
                 AuthorLastName = x.AuthorLastName,
                 AuthorInfo = x.AuthorInfo,
+                Id =x.AuthorId,
+                
             }).ToList();
             return View(list);
         }
@@ -37,7 +39,16 @@ namespace LibraryMVC.Controllers
         {
             _context.Authors.Add(author);
             _context.SaveChanges();
-            return View();
+            return RedirectToAction("Index");
+        }
+
+        public IActionResult Delete(int Id)
+        {
+            Author author = _context.Authors.Find(Id);
+            _context.Remove(author);
+            _context.SaveChanges();
+
+            return RedirectToAction("Index");
         }
 
 

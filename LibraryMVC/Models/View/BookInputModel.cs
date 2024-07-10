@@ -2,7 +2,7 @@
 
 namespace LibraryMVC.Models.View
 {
-    public class BookInputView
+    public class BookInputModel
     {
         public int BookId { get; set; }
         public string BookName { get; set; }

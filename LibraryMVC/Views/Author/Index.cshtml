@@ -8,11 +8,33 @@
 
 <h1>List</h1>
 
-@foreach (var item in Model)
-{
-    <div>
-        <span>@item.AuthorName</span> &nbsp;
-        <span>@item.AuthorLastName</span>&nbsp;
-        <span>@item.AuthorInfo</span>
-    </div>
-}
+<a asp-controller="Author" asp-action="AddAuthor" class="btn btn-primary">Create</a>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Last Name</th>
+            <th scope="col">Info</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.AuthorName</td>
+                <td>@item.AuthorLastName</td>
+                <td>@item.AuthorInfo </td>                
+                <td><a asp-controller="Author" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger"><i class="fa-solid fa-trash"></i> Delete </a>  </td>
+            </tr>
+
+        }
+
+    </tbody>
+</table>
+
+
+
+
+

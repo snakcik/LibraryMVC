@@ -57,19 +57,47 @@ namespace LibraryMVC.Controllers
             book.CategoryId = bookInputModel.CategoryId;
             book.AuthorId = bookInputModel.AuthorId;
 
-            string FileName = bookInputModel.ImagePath;
-            Guid guid = Guid.NewGuid();
-            FileName = guid + "_" + FileName;
+            //string FileName = bookInputModel.ImagePath;
+            //Guid guid = Guid.NewGuid();
+            //FileName = guid + "_" + FileName;
 
-            FileStream fs = new FileStream("wwwroot/BookImage/" + FileName, FileMode.Create);
-            book.Image.CopyTo(fs);
-            fs.Close();
-            book.ImagePath = FileName;
-            
-            
-            _context.Books.Add(book);
-            _context.SaveChanges();
+            //FileStream fs = new FileStream("wwwroot/BookImage/" + FileName, FileMode.Create);
+            //book.Image.CopyTo(fs);
+            //fs.Close();
+            //book.ImagePath = FileName;
+            bool hataolustu = true;
+            if (bookInputModel.BookName == null)          
+            { ViewBag.BookName = false;
+                hataolustu = false;
+            }
+            if(bookInputModel.BookPrice ==null)
+             {   ViewBag.Price = false;
+                hataolustu = false;
+             }
+            if (bookInputModel.RelaseDate ==null)
+                {
+                ViewBag.RelaseDate = false;
+                hataolustu = false;
+                }
+            if (bookInputModel.CategoryId == null)
+                {
+                ViewBag.CategoryId = false;
+                hataolustu = false;
+                 }
+            if (bookInputModel.AuthorId == null)
+                {
+                ViewBag.AuthorId = false;
+                hataolustu = false;
+                 }
+            if(hataolustu !=false)
+            {
+                _context.Books.Add(book);
+                _context.SaveChanges();
+            }
+            else
+              { return RedirectToAction("BookCrate"); }
 
+         
             return RedirectToAction("Index");
         }
 

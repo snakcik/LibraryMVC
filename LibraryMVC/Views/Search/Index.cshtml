@@ -1,0 +1,35 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+@model IEnumerable<Book>
+
+<form method="get" action="Index">
+    <p>
+        Search by name or author: <input type="text" name="searchString" />
+        <input type="submit" value="Search" />
+    </p>
+</form>
+
+<table class="table">
+    <tr>
+        <th>Book Name</th>
+        <th>Author</th>
+        <th>Price</th>
+        <th>Category</th>
+        <th>Release Date</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.BookName</td>
+            <td>@item.Author.FullName</td>
+            <td>@item.BookPrice</td>
+            <td>@item.Category.CategoryName</td>
+            <td>@item.RealseDate.ToString("yyyy-MM-dd")</td>
+        </tr>
+    }
+</table>

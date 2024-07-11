@@ -68,6 +68,7 @@ namespace LibraryMVC.Controllers
             bool hataolustu = true;
             if (bookInputModel.BookName == null)          
             { ViewBag.BookName = false;
+                ViewBag.BookNameMessage = "Boş Burakılamz";
                 hataolustu = false;
             }
             if(bookInputModel.BookPrice ==null)
@@ -95,7 +96,7 @@ namespace LibraryMVC.Controllers
                 _context.SaveChanges();
             }
             else
-              { return RedirectToAction("BookCrate"); }
+              { return View(); }
 
          
             return RedirectToAction("Index");

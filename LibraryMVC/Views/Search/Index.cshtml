@@ -1,14 +1,18 @@
-﻿
+﻿@using System.Collections
+@using LibraryMVC.Models.View
+
 @{
     ViewData["Title"] = "Index";
 }
 
 <h1>Index</h1>
-@model IEnumerable<Book>
+@model List<BookViewModel>
 
-<form method="get" action="Index">
+
+<form method="get" action="@Url.Action("Index")">
     <p>
-        Search by name or author: <input type="text" name="searchString" />
+        Search by name, author or category:
+        <input type="text" name="Keyword" value="@Request.QueryString["Keyword"]" />
         <input type="submit" value="Search" />
     </p>
 </form>
@@ -26,10 +30,10 @@
     {
         <tr>
             <td>@item.BookName</td>
-            <td>@item.Author.FullName</td>
+            <td>@item.AuthorName</td>
             <td>@item.BookPrice</td>
-            <td>@item.Category.CategoryName</td>
-            <td>@item.RealseDate.ToString("yyyy-MM-dd")</td>
+            <td>@item.CategoryName</td>
+           <td>@item.RealaseDate.ToString("yyyy-MM-dd")</td> 
         </tr>
     }
 </table>

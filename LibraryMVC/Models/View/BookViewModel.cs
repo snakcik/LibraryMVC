@@ -7,9 +7,8 @@
         public decimal BookPrice { get; set; }
         public string CategoryName { get; set; }
         public string AuthorName { get; set; }
-
-        public int AuthorId { get; set; }
-        public int CategoryId { get; set; }
+        public DateTime RealaseDate { get; set; }
+        public string Keyword { get; set; }
 
 
     }

@@ -9,12 +9,9 @@
 @model List<BookViewModel>
 
 
-<form method="get" action="@Url.Action("Index")">
-    <p>
-        Search by name, author or category:
-        <input type="text" name="Keyword" value="@Request.QueryString["Keyword"]" />
-        <input type="submit" value="Search" />
-    </p>
+<form id="searchForm">
+    <input type="text" id="Keyword" name="keyword" placeholder="Search by keyword" />
+    <button type="submit">Search</button>
 </form>
 
 <table class="table">
@@ -25,7 +22,7 @@
         <th>Category</th>
         <th>Release Date</th>
     </tr>
-
+    <div id="bookList">
     @foreach (var item in Model)
     {
         <tr>
@@ -36,4 +33,28 @@
            <td>@item.RealaseDate.ToString("yyyy-MM-dd")</td> 
         </tr>
     }
+    </div>
 </table>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $("#searchForm").on("submit", function (e) {
+                e.preventDefault();
+                var keyword = $("#keyword").val();
+
+                $.ajax({
+                    url: '@Url.Action("Index", "Books")',
+                    type: 'GET',
+                    data: { Keyword: keyword },
+                    success: function (data) {
+                        $("#bookList").html($(data).find("#bookList").html());
+                    },
+                    error: function () {
+                        alert("An error occurred while processing your request. Please try again.");
+                    }
+                });
+            });
+        });
+    </script>
+}

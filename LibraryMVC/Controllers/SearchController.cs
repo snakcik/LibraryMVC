@@ -13,52 +13,42 @@ namespace LibraryMVC.Controllers
             _context = context;
         }
 
-        public IActionResult Index(BookViewModel bookViewModel,string Keyword)
+        public IActionResult Index(BookViewModel bookViewModel, string Keyword)
         {
-            //string Keyword = "Ola";
             List<BookViewModel> books;
 
             if (string.IsNullOrEmpty(Keyword))
-
             {
-               
-                books = _context.Books.Select(x=> new BookViewModel
+                books = _context.Books.Select(x => new BookViewModel
                 {
-                    BookName = x.BookName, 
+                    BookName = x.BookName,
                     AuthorName = x.Author.FullName,
                     CategoryName = x.Category.CategoryName,
                     BookPrice = x.BookPrice,
                     RealaseDate = x.RealseDate,
                 }).ToList();
-
-               
             }
             else
             {
                 books = _context.Books
-                .Include(x=>x.Author)
-                .Include(x=>x.Category)
-                .AsEnumerable()
-                .Where(x => x.BookName.Contains(Keyword) ||
-                          x.Category.CategoryName.Contains(Keyword) ||
-                          x.Author.AuthorName.Contains(Keyword)
-                )
-                .Select(book => new BookViewModel
-                {
-                    BookName = book.BookName,
-                    AuthorName = book.Author.FullName,
-                    CategoryName = book.Category.CategoryName,
-                    BookPrice = book.BookPrice,
-                    RealaseDate = book.RealseDate
-                }
-                ).ToList();
-                
+                    .Include(x => x.Author)
+                    .Include(x => x.Category)
+                    .AsEnumerable()
+                    .Where(x => x.BookName.Contains(Keyword) ||
+                                x.Category.CategoryName.Contains(Keyword) ||
+                                x.Author.AuthorName.Contains(Keyword))
+                    .Select(book => new BookViewModel
+                    {
+                        BookName = book.BookName,
+                        AuthorName = book.Author.FullName,
+                        CategoryName = book.Category.CategoryName,
+                        BookPrice = book.BookPrice,
+                        RealaseDate = book.RealseDate
+                    }).ToList();
             }
 
             return View(books);
-
-
-            
         }
+
     }
 }

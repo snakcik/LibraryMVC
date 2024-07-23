@@ -9,7 +9,7 @@
 @model List<BookViewModel>
 
 
-<form id="searchForm">
+<form action='@Url.Action("Index","Search")' method="get" id="searchForm">
     <input type="text" id="Keyword" name="keyword" placeholder="Search by keyword" />
     <button type="submit">Search</button>
 </form>
@@ -39,22 +39,7 @@
 @section Scripts {
     <script>
         $(document).ready(function () {
-            $("#searchForm").on("submit", function (e) {
-                e.preventDefault();
-                var keyword = $("#keyword").val();
-
-                $.ajax({
-                    url: '@Url.Action("Index", "Books")',
-                    type: 'GET',
-                    data: { Keyword: keyword },
-                    success: function (data) {
-                        $("#bookList").html($(data).find("#bookList").html());
-                    },
-                    error: function () {
-                        alert("An error occurred while processing your request. Please try again.");
-                    }
-                });
-            });
+            $("#Keyword").val((new URL(location.href)).searchParams.get('keyword'))
         });
     </script>
-}
+    }
